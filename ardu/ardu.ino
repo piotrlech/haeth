@@ -56,6 +56,7 @@
 #include <SPI.h>
 #include "utility/debug.h"
 #include "utility/socket.h"
+#include "pass.h"
 
 // These are the interrupt and control pins
 #define ADAFRUIT_CC3000_IRQ   3  // MUST be an interrupt pin!
