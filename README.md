@@ -1,7 +1,7 @@
 Android Home Automation
 ===================================
 
-Just a beginning - do not download.
+Just a beginning - do not download as it does not work. The CC3000 module returned - awaiting replacement.
 
 Introduction
 ------------
