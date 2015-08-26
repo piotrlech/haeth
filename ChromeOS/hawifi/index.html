@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HA WiFi</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <h1 id="greeting"></h1>
+
+  <br />
+
+  <div id="urlbox">
+    URL: <input type="text" size="70" id="url" value="192.168.100.149"/>
+  <br /><br /><br />
+    Cmd: <input type="text" size="70" id="cmd" value="l1n"/>
+  <br /><br /><br />
+    <button id="show">Submit</button>    
+  </div>
+
+  <br />
+
+
+  <br />
+  Response:
+  <div id="response_header">
+  </div>
+  <br />
+  <div id="response_body">
+  </div>
+
+  <div id="demo">
+    <i> Loading ...</i>
+  </div>
+
+  <script src="sjcl.js"></script>
+  <script src="main.js"></script>
+
+</body>
+</html>
