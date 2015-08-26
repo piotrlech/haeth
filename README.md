@@ -1,7 +1,9 @@
 Android Home Automation
 ===================================
 
-Just a beginning - do not download as it does not work. The CC3000 module returned - awaiting replacement.
+For now, the Chrome extension works already - it uses nonces and HMAC-SHA256 for security.
+
+Android client under development. 
 
 Introduction
 ------------
