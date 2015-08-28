@@ -36,7 +36,6 @@ submitButton.addEventListener('click', function(e) {
   
   //var url = "http://cne02.dynamic.nsn-net.net:8181";
   //var url = "http://www.onet.pl";
-  //var url = 'http://piotrlech.ddns.net:59572/' + mT + '/' + hmac;
   var url = 'http://192.168.100.149/l1o/' + mT + '/' + hmac;
   console.log(url);
 
