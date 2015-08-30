@@ -80,7 +80,6 @@ public class MainActivity extends FragmentActivity {
             // raw HTML from www.google.com.
             case R.id.fetch_action:
                 new DownloadTask().execute("http://www.google.com");
-                //new DownloadTask().execute("http://cne02.dynamic.nsn-net.net:8181/");
                 return true;
             // Clear the log view fragment.
             case R.id.clear_action:

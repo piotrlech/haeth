@@ -1,9 +1,9 @@
-Android Home Automation
+
+Android NetworkConnect Sample
 ===================================
 
-For now, the Chrome extension works already - it uses nonces and HMAC-SHA256 for security.
-
-Android client under development. 
+This sample demonstrates how to connect to the network and fetch raw HTML using
+HttpURLConnection. AsyncTask is used to perform the fetch on a background thread.
 
 Introduction
 ------------
@@ -17,8 +17,8 @@ network connection, the sample uses HttpURLConnection.
 Pre-requisites
 --------------
 
-- Android SDK v22
-- Android Build Tools v22.0.1
+- Android SDK v23
+- Android Build Tools v23.0.0
 - Android Support Repository
 
 Screenshots
@@ -29,7 +29,8 @@ Screenshots
 Getting Started
 ---------------
 
-Based on Adafruit CC3000 
+This sample uses the Gradle build system. To build this project, use the
+"gradlew build" command or use "Import Project" in Android Studio.
 
 Support
 -------
