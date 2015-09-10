@@ -79,7 +79,9 @@ public class MainActivity extends FragmentActivity {
             // When the user clicks FETCH, fetch the first 500 characters of
             // raw HTML from www.google.com.
             case R.id.fetch_action:
-                new DownloadTask().execute("http://www.google.com");
+                //new DownloadTask().execute("http://piotrlech.ddns.net/l1f/42/f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8");
+                //new DownloadTask().execute("http://piotrlech.ddns.net:60371/l1f/42/f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8");
+                new DownloadTask().execute("http://m.onet.pl");
                 return true;
             // Clear the log view fragment.
             case R.id.clear_action:
@@ -100,7 +102,8 @@ public class MainActivity extends FragmentActivity {
             try {
                 return loadFromNetwork(urls[0]);
             } catch (IOException e) {
-              return getString(R.string.connection_error);
+              //return getString(R.string.connection_error);
+                return e.getMessage();
             }
         }
 
