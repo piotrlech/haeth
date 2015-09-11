@@ -81,19 +81,28 @@ public class MainActivity extends FragmentActivity {
         return true;
     }
 
+     public long myTime() {
+         /*long v = System.currentTimeMillis() / 1000L;
+         long d = 1440409855L;
+         if(D) Log.e(TAG, "v:[" + v + "]");
+         if(D) Log.e(TAG, "d:[" + d + "]");
+         v -= d;
+         if(D) Log.e(TAG, "v:[" + v + "]");*/
+         return (System.currentTimeMillis() / 1000L - 1440409855L);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // When the user clicks FETCH, fetch the first 500 characters of
-            // raw HTML from www.google.com.
             case R.id.fetch_action:
                 final Charset asciiCs = Charset.forName("US-ASCII");
                 String command = "l1f";
-                int nonce = 101;
+                long nonce = myTime();
                 String HMAC_PASS = "password";
                 String HMAC_KEY  = "key";
-                //String beforeHmac = "/" + HMAC_PASS + "/" + command + "/" + nonce + "/";
-                String beforeHmac = "The quick brown fox jumps over the lazy dog";
+                //String beforeHmac = "The quick brown fox jumps over the lazy dog";
+                String beforeHmac = "/" + HMAC_PASS + "/" + command + "/" + nonce + "/";
                 String result = "";
                 try {
                     final Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
@@ -103,14 +112,15 @@ public class MainActivity extends FragmentActivity {
                     for (final byte element : mac_data) {
                         result += Integer.toString((element & 0xff) + 0x100, 16).substring(1);
                     }
-                    if(D) Log.e(TAG, "Result:[" + result + "]");
                 } catch(Exception e) {
                     if(D) Log.e(TAG, "Crypto Exception");
                 }
 
-                //new DownloadTask().execute("http://piotrlech.ddns.net/l1f/42/f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8");
-                //new DownloadTask().execute("http://piotrlech.ddns.net:60371" + result);
+                //new DownloadTask().execute("http://piotrlech.ddns.net:60371/l1f/42/f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8");
+                new DownloadTask().execute("http://piotrlech.ddns.net:60371/" + command + "/" + nonce + "/" + result);
                 //new DownloadTask().execute("http://m.onet.pl");
+                //if(D) Log.e(TAG, "Result:[" + "http://piotrlech.ddns.net:60371/" + command + "/" + nonce + "/" + result + "]");
+                //if(D) Log.e(TAG, "Result:[" + nonce + "]");
                 return true;
             // Clear the log view fragment.
             case R.id.clear_action:
@@ -153,11 +163,12 @@ public class MainActivity extends FragmentActivity {
 
         try {
             stream = downloadUrl(urlString);
-            //for(int i = 0; i < 5; i++) {
-            //   str = str + readIt(stream, 500);
-            //    if(D) Log.e(TAG, "i = " + i + "'" + stream + '+');
-            //}
-            str = readIt(stream, 500);
+            long mStart = System.currentTimeMillis();
+            while((System.currentTimeMillis() - mStart) < 500) {
+               str = str + readIt(stream, 500);
+               //if(D) Log.e(TAG, "i = " + i + "'" + stream + '+');
+            }
+            //str = readIt(stream, 500);
        } finally {
            if (stream != null) {
                stream.close();
