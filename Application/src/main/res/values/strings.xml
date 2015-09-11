@@ -16,10 +16,19 @@
 
 <resources>
     <string name="welcome_message">Welcome to Network Connect!
-        Click FETCH to fetch the first 500 characters of raw HTML from www.google.com.
+        Click FETCH to fetch.
     </string>
 
     <string name="fetch_text">Fetch</string>
     <string name="clear_text">Clear</string>
     <string name="connection_error">Connection error.</string>
+
+    <!-- Piotr's -->
+    <string name="pierwszy">	pierwszy</string>
+    <string name="drugi">		drugi</string>
+    <string name="trzeci">		trzeci</string>
+    <string name="czwarty">		czwarty</string>
+    <string name="piaty">		piaty</string>
+    <string name="szosty">		szosty</string>
+
 </resources>
