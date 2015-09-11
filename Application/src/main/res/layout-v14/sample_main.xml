@@ -65,23 +65,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Górne okno   "
-                android:id="@+id/textView20"
-                android:layout_row="2"
-                android:layout_column="0" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text=""
                 android:id="@+id/textView30"
                 android:layout_row="3"
-                android:layout_column="0" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dolne okno   "
-                android:id="@+id/textView40"
-                android:layout_row="4"
                 android:layout_column="0" />
             <TextView
                 android:layout_width="wrap_content"
@@ -97,16 +83,6 @@
                 android:id="@+id/textView1"
                 android:layout_row="1"
                 android:layout_column="1" />
-            <SeekBar
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/seekBar"
-                android:layout_row="2"
-                android:layout_column="1"
-                android:progress="1"
-                android:layout_columnSpan="2"
-                android:max="2"
-                android:longClickable="true" />
 
             <TextView
                 android:layout_width="wrap_content"

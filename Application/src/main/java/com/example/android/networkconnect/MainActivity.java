@@ -104,42 +104,7 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
-        mSeekBar = (SeekBar) findViewById(R.id.seekBar);
-        mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            }
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                seekFrom = seekBar.getProgress();
-            }
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                int p = seekBar.getProgress();
-                switch (p) {
-                    case 0:
-                        if (seekFrom == 2) {
-                            throwCmd("w1uf");
-                            SystemClock.sleep(1000);
-                        }
-                        throwCmd("w1un");
-                        break;
-                    case 1:
-                        if (seekFrom == 0)
-                            throwCmd("w1df");
-                        else if (seekFrom == 2)
-                            throwCmd("w1uf");
-                        break;
-                    case 2:
-                        if (seekFrom == 0) {
-                            throwCmd("w1df");
-                            SystemClock.sleep(1000);
-                        }
-                        throwCmd("w1dn");
-                        break;
-                }
-            }
-        });
+
     }
 
     @Override
