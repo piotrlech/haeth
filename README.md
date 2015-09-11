@@ -1,9 +1,10 @@
 
-Android NetworkConnect Sample
+Home Atomation On The Cheap
 ===================================
 
-This sample demonstrates how to connect to the network and fetch raw HTML using
-HttpURLConnection. AsyncTask is used to perform the fetch on a background thread.
+Initial attempts with CC3000 unsuccessful. The module is not stable enough. Its http server stops after a few hours and requires a restart.
+
+Currently trying with W5100 - so far so good.
 
 Introduction
 ------------

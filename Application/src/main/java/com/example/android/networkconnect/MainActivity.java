@@ -34,7 +34,14 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  * Sample application demonstrating how to connect to the network and fetch raw
@@ -47,6 +54,7 @@ import java.net.URL;
 public class MainActivity extends FragmentActivity {
 
     public static final String TAG = "Network Connect";
+    private static final boolean D = true;
 
     // Reference to the fragment showing events, so we can clear it with a button
     // as necessary.
@@ -79,9 +87,30 @@ public class MainActivity extends FragmentActivity {
             // When the user clicks FETCH, fetch the first 500 characters of
             // raw HTML from www.google.com.
             case R.id.fetch_action:
+                final Charset asciiCs = Charset.forName("US-ASCII");
+                String command = "l1f";
+                int nonce = 101;
+                String HMAC_PASS = "password";
+                String HMAC_KEY  = "key";
+                //String beforeHmac = "/" + HMAC_PASS + "/" + command + "/" + nonce + "/";
+                String beforeHmac = "The quick brown fox jumps over the lazy dog";
+                String result = "";
+                try {
+                    final Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
+                    final SecretKeySpec secret_key = new javax.crypto.spec.SecretKeySpec(asciiCs.encode(HMAC_KEY).array(), "HmacSHA256");
+                    sha256_HMAC.init(secret_key);
+                    final byte[] mac_data = sha256_HMAC.doFinal(asciiCs.encode(beforeHmac).array());
+                    for (final byte element : mac_data) {
+                        result += Integer.toString((element & 0xff) + 0x100, 16).substring(1);
+                    }
+                    if(D) Log.e(TAG, "Result:[" + result + "]");
+                } catch(Exception e) {
+                    if(D) Log.e(TAG, "Crypto Exception");
+                }
+
                 //new DownloadTask().execute("http://piotrlech.ddns.net/l1f/42/f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8");
-                //new DownloadTask().execute("http://piotrlech.ddns.net:60371/l1f/42/f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8");
-                new DownloadTask().execute("http://m.onet.pl");
+                //new DownloadTask().execute("http://piotrlech.ddns.net:60371" + result);
+                //new DownloadTask().execute("http://m.onet.pl");
                 return true;
             // Clear the log view fragment.
             case R.id.clear_action:
@@ -124,6 +153,10 @@ public class MainActivity extends FragmentActivity {
 
         try {
             stream = downloadUrl(urlString);
+            //for(int i = 0; i < 5; i++) {
+            //   str = str + readIt(stream, 500);
+            //    if(D) Log.e(TAG, "i = " + i + "'" + stream + '+');
+            //}
             str = readIt(stream, 500);
        } finally {
            if (stream != null) {
@@ -143,11 +176,14 @@ public class MainActivity extends FragmentActivity {
     private InputStream downloadUrl(String urlString) throws IOException {
         // BEGIN_INCLUDE(get_inputstream)
         URL url = new URL(urlString);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("10.144.1.10", 8080));
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection(proxy);
         conn.setReadTimeout(10000 /* milliseconds */);
         conn.setConnectTimeout(15000 /* milliseconds */);
         conn.setRequestMethod("GET");
         conn.setDoInput(true);
+        //conn.usingProxy();
+        //conn.setAllowUserInteraction(false);
         // Start the query
         conn.connect();
         InputStream stream = conn.getInputStream();
@@ -168,6 +204,20 @@ public class MainActivity extends FragmentActivity {
         char[] buffer = new char[len];
         reader.read(buffer);
         return new String(buffer);
+
+        /*BufferedInputStream bis = new BufferedInputStream(stream);
+        ByteArrayBuffer baf = new ByteArrayBuffer(50);
+        int read = 0;
+        int bufSize = 512;
+        byte[] bbuffer = new byte[bufSize];
+        while(true){
+            read = bis.read(bbuffer);
+            if(read==-1){
+                break;
+            }
+            baf.append(bbuffer, 0, read);
+        }
+        return new String(baf.toByteArray());*/
     }
 
     /** Create a chain of targets that will receive log data */
