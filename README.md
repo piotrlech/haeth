@@ -7,4 +7,3 @@ The initial attempts to reach Arduino over WiFi were unsuccessful due to the CC3
 The commands are delivered to Arduino over http and they are authenticated with a nonce and the HMAC-SHA256. There are 2 clients here already - one as a Chrome extension, and the other one as an Android apk.
 
 In the neighbour repository of mine, there is yet another Android client, which reaches Arduino over the Bluetooth.
-
